@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-const port = process.env.PORT || 10000;
+const port = parseInt(process.env.PORT, 10);
 
 app.use(cors());
 
@@ -135,6 +135,25 @@ app.get('/v1/search/season', (req, res) => {
         total: result.length,
         data: result.slice((page - 1) * limit, page * limit)
     })
+});
+
+app.get('/v1/all', (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
+    if (page < 1 || limit < 1) {
+        return res.status(400).json({ error: 'page and limit must be greater than 0' });
+    }
+    if (page > 1000 || limit > 100) {
+        return res.status(400).json({ error: 'page must be less than 1000 and limit must be less than 100' });
+    }
+
+    res.json({
+        page,
+        limit,
+        total: animeData.data.length,
+        data: animeData.data.slice((page - 1) * limit, page * limit)
+    });
 });
 
 app.listen(port, () => {
