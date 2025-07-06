@@ -5,7 +5,13 @@ const cors = require('cors');
 const app = express();
 const port = parseInt(process.env.PORT, 10);
 
-app.use(cors());
+const cors = require('cors');
+app.use(cors({
+  origin: '*', // Allow all origins (for testing; restrict in production)
+  methods: ['GET'],
+  allowedHeaders: ['Content-Type', 'X-RapidAPI-Key']
+}));
+
 
 app.get('/v1/details', (req, res) => {
     const animeTitle = req.query.title;
