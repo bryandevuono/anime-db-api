@@ -5,11 +5,8 @@ const cors = require('cors');
 const app = express();
 const port = parseInt(process.env.PORT, 10);
 
-app.use(cors({
-  origin: '*', // Allow all origins (for testing; restrict in production)
-  methods: ['GET'],
-  allowedHeaders: ['Content-Type', 'X-RapidAPI-Key']
-}));
+app.use(cors({ origin: '*' }));
+
 
 
 app.get('/v1/details', (req, res) => {
