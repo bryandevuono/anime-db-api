@@ -5,7 +5,6 @@ const cors = require('cors');
 const app = express();
 const port = parseInt(process.env.PORT, 10);
 
-const cors = require('cors');
 app.use(cors({
   origin: '*', // Allow all origins (for testing; restrict in production)
   methods: ['GET'],
